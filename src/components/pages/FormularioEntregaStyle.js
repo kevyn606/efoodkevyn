@@ -3,8 +3,15 @@ import { cores } from "../../styles";
 
 export const Formulariostyle  = styled.form`
 
+h2{
+  color:${cores.laranja};
+  font-weight:700;
+    font-size:16px;
+    padding-top:24px;
+}
+
 .erro{
-    color:${cores.bege};
+    color:${cores.laranja};
 
 }
 
@@ -15,7 +22,7 @@ export const Formulariostyle  = styled.form`
 }
 
 label{
-    color:${cores.bege};
+    color:${cores.laranja};
     display:block;
     font-weight:700;
     font-size:14px;
@@ -24,7 +31,7 @@ label{
 
 input{
     padding:8px;
-    background-color:${cores.bege};
+    background-color:${cores.laranja};
     color:black;
     width:100%;
     border:none;
@@ -33,7 +40,7 @@ input{
 }
 
 .ButtonForm2{
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   text-align:center;
@@ -46,7 +53,7 @@ input{
 }
 
 .ButtonForm3{
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   text-align:center;

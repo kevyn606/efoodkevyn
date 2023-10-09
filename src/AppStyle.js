@@ -34,6 +34,11 @@ display: grid;
   gap: 80px;
   padding: 80px 0px;
 
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+
+  }
+
 `
 
 
@@ -42,6 +47,16 @@ export const Card = styled.li`
   width: 472px;
   height: 398px;
   background-color:${cores.branco};
+  border: solid 2px ${cores.vermelho};
+
+
+  @media (max-width: 767px) {
+    width: 100%;
+ 
+
+  }
+
+
 
   .CardImg{
     width:100%;
@@ -84,7 +99,8 @@ export const Card = styled.li`
   font-size:14px;
   font-weight:700;
   background-color:${cores.vermelho};
-  color:${cores.bege}
+  color:${cores.bege};
+  
 
     }
 

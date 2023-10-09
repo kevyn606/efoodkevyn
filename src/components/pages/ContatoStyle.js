@@ -11,6 +11,18 @@ height:186px;
 width:100vw;
 padding:40px;
 
+.Container{
+  @media (max-width: 767px) {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    
+  }
+
+}
+
+
+
 p{
   cursor: pointer;
 }
@@ -82,7 +94,7 @@ width:320px;
 height:auto;
 background-color: ${cores.vermelho};
 padding: 8px;
-color:${cores.bege};
+color:${cores.laranja};
 display:flex;
 flex-direction:column;
 justify-content:space-between;
@@ -114,7 +126,7 @@ p{
 
 button{
   
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   font-size:14px;
@@ -133,6 +145,12 @@ grid-template-columns: 1fr 1fr 1fr;
 gap:32px;
 padding-bottom:120px;
 padding-top:56px;
+
+@media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    
+
+  }
 
 
 `
@@ -154,7 +172,7 @@ position:absolute;
 width:1024px;
 height:344px;
 background-color:${cores.vermelho};
-color:${cores.bege};
+color:${cores.laranja};
 padding:32px;
 display:grid;
 grid-template-columns: 280px auto 10px;
@@ -193,7 +211,7 @@ top: 50%; /* Centraliza verticalmente */
 
 button{
   
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   font-size:14px;
@@ -217,7 +235,7 @@ z-index:12;
 
 
 .valorTotal{
-  color:${cores.bege};
+  color:${cores.laranja};
   font-size:14px;
   font-weight:700px;
   display:flex;
@@ -226,7 +244,7 @@ z-index:12;
 }
 
 .ButtonForm{
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   text-align:center;
@@ -244,7 +262,7 @@ z-index:12;
 export const CarrinhoCard = styled.div`
 width:344px;
 height:100px;
-background-color:${cores.bege};
+background-color:${cores.laranja};
 color:${cores.vermelho};
 display:grid;
 grid-template-columns: 80px auto 10px;

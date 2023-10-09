@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { cores } from "../../styles";
 
 export const FormularioPagamentostyle  = styled.form`
-color:${cores.bege};
+color:${cores.laranja};
 
 .erro{
-    color:${cores.bege};
+    color:${cores.laranja};
 
 }
 
@@ -15,8 +15,20 @@ color:${cores.bege};
     gap:34px;
 }
 
+.numeroCvv{
+  display:grid;
+  grid-template-columns:228px auto;
+  gap:30px;
+}
+.MesAno{
+  display:grid;
+  grid-template-columns:155px auto;
+  gap:30px;
+}
+
+
 label{
-    color:${cores.bege};
+    color:${cores.laranja};
     display:block;
     font-weight:700;
     font-size:14px;
@@ -25,7 +37,7 @@ label{
 
 input{
     padding:8px;
-    background-color:${cores.bege};
+    background-color:${cores.laranja};
     color:black;
     width:100%;
     border:none;
@@ -34,7 +46,7 @@ input{
 }
 
 .ButtonForm2{
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   text-align:center;
@@ -47,7 +59,7 @@ input{
 }
 
 .ButtonForm3{
-  background-color:${cores.bege};
+  background-color:${cores.laranja};
   color:${cores.vermelho};
   padding:4px;
   text-align:center;

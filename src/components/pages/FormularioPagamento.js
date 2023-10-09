@@ -1,27 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import {FormularioPagamentostyle} from './FormularioPagamentoStyle';
-import {Carrinho} from './ContatoStyle';
+import { FormularioPagamentostyle } from './FormularioPagamentoStyle';
+import { Carrinho } from './ContatoStyle';
 import Pedido from './Pedido';
 import axios from 'axios';
 
 const enviarDadosParaAPIFalsa = async (dados, endpoint) => {
-    try {
-      const response = await axios.post(`http://localhost:3001/${endpoint}`, dados);
-      console.log('Dados enviados com sucesso:', response.data);
-      // Realize qualquer ação necessária após o envio bem-sucedido, como redirecionar ou atualizar a interface do usuário.
-    } catch (error) {
-      console.error('Erro ao enviar dados:', error);
-    }
-  };
-  
-  const handleSubmitFormularioCartao = (values) => {
-    enviarDadosParaAPIFalsa(values, 'formulariosCartao');
-  };
+  try {
+    const response = await axios.post(`http://localhost:3001/${endpoint}`, dados);
+    console.log('Dados enviados com sucesso:', response.data);
+    // Realize qualquer ação necessária após o envio bem-sucedido, como redirecionar ou atualizar a interface do usuário.
+  } catch (error) {
+    console.error('Erro ao enviar dados:', error);
+  }
+};
 
+const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, voltarEntrega, abrirPedido }) => {
+  const [isFormValid, setIsFormValid] = useState(false);
 
-const FormularioCartao = ({concluir,exibirPedido,valorTotal, voltarEntrega,abrirPedido}) => {
   const formik = useFormik({
     initialValues: {
       nomeCartao: '',
@@ -48,97 +45,130 @@ const FormularioCartao = ({concluir,exibirPedido,valorTotal, voltarEntrega,abrir
     }),
     onSubmit: (values) => {
       console.log('Dados do cartão submetidos:', values);
-      // Aqui você pode enviar os dados para o servidor ou fazer o que desejar com eles.
+      handleSubmitFormularioCartao(values);
     },
   });
 
+  const handleBlur = (e) => {
+    const fieldName = e.target.name;
+    if (!formik.errors[fieldName]) {
+      setIsFormValid(Object.keys(formik.errors).length === 0);
+    }
+  };
+
+  const handleSubmitFormularioCartao = (values) => {
+    if (isFormValid) {
+      enviarDadosParaAPIFalsa(values, 'formulariosCartao');
+    } else {
+      alert('Por favor, preencha todos os campos obrigatórios antes de continuar.');
+    }
+  };
+
   return (
     <>
-    <FormularioPagamentostyle onSubmit={formik.handleSubmit}>
+      <FormularioPagamentostyle onSubmit={formik.handleSubmit}>
         <p>Pagamento - Valor a pagar R$ {valorTotal}</p>
-      <div>
-        <label htmlFor="nomeCartao">Nome no Cartão:</label>
-        <input
-          type="text"
-          id="nomeCartao"
-          name="nomeCartao"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.nomeCartao}
-        />
-        {formik.touched.nomeCartao && formik.errors.nomeCartao ? (
-          <div className="erro">{formik.errors.nomeCartao}</div>
-        ) : null}
-      </div>
-      <div>
-        <label htmlFor="numeroCartao">Número do Cartão:</label>
-        <input
-          type="text"
-          id="numeroCartao"
-          name="numeroCartao"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.numeroCartao}
-        />
-        {formik.touched.numeroCartao && formik.errors.numeroCartao ? (
-          <div className="erro">{formik.errors.numeroCartao}</div>
-        ) : null}
-      </div>
-      <div>
-        <label htmlFor="cvv">CVV:</label>
-        <input
-          type="text"
-          id="cvv"
-          name="cvv"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.cvv}
-        />
-        {formik.touched.cvv && formik.errors.cvv ? (
-          <div className="erro">{formik.errors.cvv}</div>
-        ) : null}
-      </div>
-      <div>
-        <label htmlFor="mesVencimento">Mês de Vencimento:</label>
-        <input
-          type="text"
-          id="mesVencimento"
-          name="mesVencimento"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.mesVencimento}
-        />
-        {formik.touched.mesVencimento && formik.errors.mesVencimento ? (
-          <div className="erro">{formik.errors.mesVencimento}</div>
-        ) : null}
-      </div>
-      <div>
-        <label htmlFor="anoVencimento">Ano de Vencimento:</label>
-        <input
-          type="text"
-          id="anoVencimento"
-          name="anoVencimento"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.anoVencimento}
-        />
-        {formik.touched.anoVencimento && formik.errors.anoVencimento ? (
-          <div className="erro">{formik.errors.anoVencimento}</div>
-        ) : null}
-      </div>
-      <button onClick={abrirPedido}  className='ButtonForm2' type="submit">Finalizar pagamento</button>
-      <button onClick={voltarEntrega} className='ButtonForm3'>Voltar para edição de endereço</button>
-    </FormularioPagamentostyle>
-    <Carrinho style={{ display: exibirPedido ? 'block' : 'none' }}>
-    <div>
-      <h2>Entrega</h2>
-      <Pedido concluir={concluir} voltarEntrega={voltarEntrega} valorTotal={valorTotal} />
-    </div>
-    </Carrinho>
+        <div>
+          <label htmlFor="nomeCartao">Nome no cartão</label>
+          <input
+            type="text"
+            id="nomeCartao"
+            name="nomeCartao"
+            onChange={formik.handleChange}
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              handleBlur(e);
+            }}
+            value={formik.values.nomeCartao}
+          />
+          {formik.touched.nomeCartao && formik.errors.nomeCartao ? (
+            <div className="erro">{formik.errors.nomeCartao}</div>
+          ) : null}
+        </div>
+        <div className='numeroCvv'>
+          <div>
+            <label htmlFor="numeroCartao">Número do cartão</label>
+            <input
+              type="text"
+              id="numeroCartao"
+              name="numeroCartao"
+              onChange={formik.handleChange}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                handleBlur(e);
+              }}
+              value={formik.values.numeroCartao}
+            />
+            {formik.touched.numeroCartao && formik.errors.numeroCartao ? (
+              <div className="erro">{formik.errors.numeroCartao}</div>
+            ) : null}
+          </div>
+          <div>
+            <label htmlFor="cvv">CVV</label>
+            <input
+              type="text"
+              id="cvv"
+              name="cvv"
+              onChange={formik.handleChange}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                handleBlur(e);
+              }}
+              value={formik.values.cvv}
+            />
+            {formik.touched.cvv && formik.errors.cvv ? (
+              <div className="erro">{formik.errors.cvv}</div>
+            ) : null}
+          </div>
+        </div>
+        <div className='MesAno'>
+          <div>
+            <label htmlFor="mesVencimento">Mês de Vencimento</label>
+            <input
+              type="text"
+              id="mesVencimento"
+              name="mesVencimento"
+              onChange={formik.handleChange}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                handleBlur(e);
+              }}
+              value={formik.values.mesVencimento}
+            />
+            {formik.touched.mesVencimento && formik.errors.mesVencimento ? (
+              <div className="erro">{formik.errors.mesVencimento}</div>
+            ) : null}
+          </div>
+          <div>
+            <label htmlFor="anoVencimento">Ano de Vencimento</label>
+            <input
+              type="text"
+              id="anoVencimento"
+              name="anoVencimento"
+              onChange={formik.handleChange}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                handleBlur(e);
+              }}
+              value={formik.values.anoVencimento}
+            />
+            {formik.touched.anoVencimento && formik.errors.anoVencimento ? (
+              <div className="erro">{formik.errors.anoVencimento}</div>
+            ) : null}
+          </div>
+        </div>
+        <button onClick={abrirPedido} className='ButtonForm2' type="submit" disabled={!isFormValid}>Finalizar pagamento</button>
+        <button onClick={voltarEntrega} className='ButtonForm3'>Voltar para edição de endereço</button>
+      </FormularioPagamentostyle>
+      <Carrinho style={{ display: exibirPedido ? 'block' : 'none' }}>
+        <div>
+          <h2>Entrega</h2>
+          <Pedido concluir={concluir} concluir2={concluir2} voltarEntrega={voltarEntrega} valorTotal={valorTotal} />
+        </div>
+      </Carrinho>
     </>
-    
-    
   );
 };
 
 export default FormularioCartao;
+

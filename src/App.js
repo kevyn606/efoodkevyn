@@ -14,6 +14,11 @@ function App() {
   const [erro, setErro] = useState(null);
   const [carrinho, setCarrinho] = useState([]);
 
+  const concluir = () => {
+    
+    setCarrinho([]);
+  }
+
   const adicionarAoCarrinho = (prato) => {
     const itemExistente = carrinho.find((item) => item.id === prato.id);
     if (itemExistente) {
@@ -101,7 +106,7 @@ function App() {
           )}
           
         </div>} />
-        <Route path="/contato/:restauranteId" element={<Contato carrinho={carrinho} adicionarAoCarrinho={adicionarAoCarrinho} removerDoCarrinho={removerDoCarrinho} calcularValorTotal={calcularValorTotal} />} />
+        <Route path="/contato/:restauranteId" element={<Contato concluir={concluir} carrinho={carrinho} setCarrinho={setCarrinho} adicionarAoCarrinho={adicionarAoCarrinho} removerDoCarrinho={removerDoCarrinho} calcularValorTotal={calcularValorTotal} />} />
        
       </Routes>
       <Footer/>

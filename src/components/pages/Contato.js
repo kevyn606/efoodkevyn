@@ -9,7 +9,7 @@ import lixo from '../../img/lixo.png'
 import { Link } from 'react-router-dom';
 
 
-function Contato({ setCarrinho,carrinho, adicionarAoCarrinho, removerDoCarrinho,calcularValorTotal }) {
+function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDoCarrinho,calcularValorTotal }) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirFormularioCartão, setExibirFormularioCartão] = useState(false);
   const [exibirPedido, setExibirPedido] = useState(false);
@@ -19,26 +19,27 @@ function Contato({ setCarrinho,carrinho, adicionarAoCarrinho, removerDoCarrinho,
   const [exibirItemCarrinho, setExibirItemCarrinho] = useState(false);
   const { state } = useLocation();
 
+
+  
+
   const abrirFormulario = () => {
     setExibirFormulario(true);
+    setExibirPedido(false);
+    setExibirFormularioCartão(false);
+    
   };
 
   const abrirFormulariocartao = () => {
     setExibirFormularioCartão(true);
+    
   };
 
   const abrirPedido = () => {
     setExibirPedido(true);
+    
   };
 
-  const concluir = () => {
-    setexibirCarrinho(false);
-    
-
-    
-  }
-
-
+  
 
   const handleSubmitEntrega = (values) => {
     console.log('Valores do formulário de entrega:', values);
@@ -92,6 +93,13 @@ function Contato({ setCarrinho,carrinho, adicionarAoCarrinho, removerDoCarrinho,
     abrirItemCarrinho();
     
   };
+  const concluir2 = () => {
+    setExibirFormularioCartão(true);
+    setexibirCarrinho(false);
+    setExibirFormulario(false);
+    setExibirItemCarrinho(false);
+    
+  }
 
   const handleRemoverDoCarrinho = (prato) => {
     removerDoCarrinho(prato);
@@ -151,8 +159,8 @@ function Contato({ setCarrinho,carrinho, adicionarAoCarrinho, removerDoCarrinho,
               </Carrinho>
               <Carrinho style={{ display: exibirFormulario ? 'block' : 'none' }}>
                                 <div>
-                                  <h2>Entrega</h2>
-                                  <Formulario concluir={concluir} exibirPedido={exibirPedido} abrirPedido={abrirPedido} voltarEntrega={voltarEntrega} voltarcarrinho={voltarcarrinho} abrirFormulariocartao={abrirFormulariocartao} exibirFormularioCartão={exibirFormularioCartão} valorTotal={valorTotal} onSubmit={handleSubmitEntrega} />
+                                  
+                                  <Formulario concluir2={concluir2} concluir={concluir} exibirPedido={exibirPedido} abrirPedido={abrirPedido} voltarEntrega={voltarEntrega} voltarcarrinho={voltarcarrinho} abrirFormulariocartao={abrirFormulariocartao} exibirFormularioCartão={exibirFormularioCartão} valorTotal={valorTotal} onSubmit={handleSubmitEntrega} />
                                 </div>
               </Carrinho>
               
