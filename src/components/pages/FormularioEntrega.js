@@ -6,16 +6,7 @@ import { Formulariostyle } from './FormularioEntregaStyle';
 import { Carrinho } from './ContatoStyle';
 import FormularioCartao from './FormularioPagamento';
 import axios from 'axios';
-
-const enviarDadosParaAPIFalsa = async (dados, endpoint) => {
-  try {
-    const response = await axios.post(`http://localhost:3001/${endpoint}`, dados);
-    console.log('Dados enviados com sucesso:', response.data);
-    // Realize qualquer ação necessária após o envio bem-sucedido, como redirecionar ou atualizar a interface do usuário.
-  } catch (error) {
-    console.error('Erro ao enviar dados:', error);
-  }
-};
+import InputMask from 'react-input-mask'; // Importe o componente InputMask
 
 const Formulario = ({ concluir2, concluir, exibirPedido, voltarcarrinho, abrirFormulariocartao, exibirFormularioCartão, valorTotal, voltarEntrega, abrirPedido }) => {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -45,8 +36,7 @@ const Formulario = ({ concluir2, concluir, exibirPedido, voltarcarrinho, abrirFo
     }),
     onSubmit: (values) => {
       console.log('Dados submetidos:', values);
-      // Aqui você pode enviar os dados para o servidor ou fazer o que desejar com eles.
-      handleSubmitFormulario(values); // Chame a função handleSubmitFormulario aqui
+      handleSubmitFormulario(values);
     },
   });
 
@@ -62,6 +52,15 @@ const Formulario = ({ concluir2, concluir, exibirPedido, voltarcarrinho, abrirFo
       enviarDadosParaAPIFalsa(values, 'formularios');
     } else {
       alert('Por favor, preencha todos os campos obrigatórios antes de continuar.');
+    }
+  };
+
+  const enviarDadosParaAPIFalsa = async (dados, endpoint) => {
+    try {
+      const response = await axios.post(`http://localhost:3001/${endpoint}`, dados);
+      console.log('Dados enviados com sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error);
     }
   };
 
@@ -123,7 +122,10 @@ const Formulario = ({ concluir2, concluir, exibirPedido, voltarcarrinho, abrirFo
         <div className='cepNumero'>
           <div>
             <label htmlFor="cep">CEP</label>
-            <input
+            <InputMask
+            placeholder='00000-000'
+              mask="99999-999"
+              maskChar=""
               type="text"
               id="cep"
               name="cep"
@@ -140,7 +142,10 @@ const Formulario = ({ concluir2, concluir, exibirPedido, voltarcarrinho, abrirFo
           </div>
           <div>
             <label htmlFor="numero">Número</label>
-            <input
+            <InputMask
+            placeholder='0000'
+              mask="99999"
+              maskChar=""
               type="text"
               id="numero"
               name="numero"

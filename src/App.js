@@ -15,7 +15,6 @@ function App() {
   const [carrinho, setCarrinho] = useState([]);
 
   const concluir = () => {
-    
     setCarrinho([]);
   }
 
@@ -87,6 +86,7 @@ function App() {
                     </Tags>
                     <img src={restaurante.capa} alt={restaurante.titulo} />
                  </div>
+                 <div className='Cardborda'>
                   <div className='CardInfo'>
                   <div className='NomeNota'>
                   <h3>{restaurante.titulo}</h3>
@@ -97,6 +97,7 @@ function App() {
                   <Link className='button' to={`/contato/${restaurante.id}`} state={{ restaurante }}>
                   Saiba mais
                   </Link>
+                  </div>
                   </div>
                 </Card>
               ))}

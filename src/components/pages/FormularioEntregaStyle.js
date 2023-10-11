@@ -37,6 +37,8 @@ input{
     border:none;
     font-weight:700;
     font-size:14px;
+
+    
 }
 
 .ButtonForm2{
@@ -45,7 +47,7 @@ input{
   padding:4px;
   text-align:center;
   font-size:14px;
-  font-weight:700px;
+  font-weight:700;
   width:100%;
   border:none;
   cursor: pointer;
@@ -58,7 +60,7 @@ input{
   padding:4px;
   text-align:center;
   font-size:14px;
-  font-weight:700px;
+  font-weight:700;
   width:100%;
   border:none;
   cursor: pointer;

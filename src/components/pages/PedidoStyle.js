@@ -13,6 +13,7 @@ export const Pedidostyle = styled.div`
   padding-top:16px;
   font-size:14px;
   font-weight:400;
+  line-height: 22px;
  }
 
  .ButtonForm4{
@@ -21,7 +22,7 @@ export const Pedidostyle = styled.div`
   padding:4px;
   text-align:center;
   font-size:14px;
-  font-weight:700px;
+  font-weight:700;
   width:100%;
   border:none;
   cursor: pointer;

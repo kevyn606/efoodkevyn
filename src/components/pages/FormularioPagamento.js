@@ -5,6 +5,7 @@ import { FormularioPagamentostyle } from './FormularioPagamentoStyle';
 import { Carrinho } from './ContatoStyle';
 import Pedido from './Pedido';
 import axios from 'axios';
+import InputMask from 'react-input-mask';
 
 const enviarDadosParaAPIFalsa = async (dados, endpoint) => {
   try {
@@ -31,16 +32,18 @@ const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, volta
       nomeCartao: Yup.string()
         .required('O nome no cartão é obrigatório'),
       numeroCartao: Yup.string()
-        .matches(/^\d{16}$/, 'Número de cartão inválido')
+        
+      .matches(/^\d{4}-\d{4}-\d{4}-\d{4}$/, 'Cartão inválido')
         .required('O número do cartão é obrigatório'),
       cvv: Yup.string()
         .matches(/^\d{3}$/, 'CVV inválido')
         .required('O CVV é obrigatório'),
+  
       mesVencimento: Yup.string()
-        .matches(/^(0[1-9]|1[0-2])$/, 'Mês de vencimento inválido')
+        .matches(/^\d{2}$/, 'Mês de vencimento inválido')
         .required('O mês de vencimento é obrigatório'),
       anoVencimento: Yup.string()
-        .matches(/^\d{4}$/, 'Ano de vencimento inválido')
+        .matches(/^\d{2}$/, 'Ano de vencimento inválido')
         .required('O ano de vencimento é obrigatório'),
     }),
     onSubmit: (values) => {
@@ -88,7 +91,11 @@ const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, volta
         <div className='numeroCvv'>
           <div>
             <label htmlFor="numeroCartao">Número do cartão</label>
-            <input
+            <InputMask
+            placeholder='0000 0000 0000 0000'
+            mask="9999-9999-9999-9999"
+            maskChar=""
+            
               type="text"
               id="numeroCartao"
               name="numeroCartao"
@@ -105,8 +112,11 @@ const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, volta
           </div>
           <div>
             <label htmlFor="cvv">CVV</label>
-            <input
+            <InputMask
+             placeholder='000'
               type="text"
+              mask="999"
+              maskChar=""
               id="cvv"
               name="cvv"
               onChange={formik.handleChange}
@@ -124,8 +134,11 @@ const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, volta
         <div className='MesAno'>
           <div>
             <label htmlFor="mesVencimento">Mês de Vencimento</label>
-            <input
+            <InputMask
+            placeholder='00'
               type="text"
+              mask="99"
+              maskChar=""
               id="mesVencimento"
               name="mesVencimento"
               onChange={formik.handleChange}
@@ -141,9 +154,12 @@ const FormularioCartao = ({ concluir2, concluir, exibirPedido, valorTotal, volta
           </div>
           <div>
             <label htmlFor="anoVencimento">Ano de Vencimento</label>
-            <input
+            <InputMask
+            placeholder='00'
               type="text"
               id="anoVencimento"
+              mask="99"
+              maskChar=""
               name="anoVencimento"
               onChange={formik.handleChange}
               onBlur={(e) => {

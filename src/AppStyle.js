@@ -47,7 +47,7 @@ export const Card = styled.li`
   width: 472px;
   height: 398px;
   background-color:${cores.branco};
-  border: solid 2px ${cores.vermelho};
+  
 
 
   @media (max-width: 767px) {
@@ -70,8 +70,16 @@ export const Card = styled.li`
     }
   }
 
+  .Cardborda{
+    border:  1px solid ${cores.vermelho};
+    border-top: 0px;
+    
+
+  }
+
   .CardInfo{
     padding:8px;
+    
 
 
     .NomeNota{
@@ -95,11 +103,11 @@ export const Card = styled.li`
     }
 
     .button{
-        padding: 6px;
+        padding:4px 6px;
   font-size:14px;
   font-weight:700;
   background-color:${cores.vermelho};
-  color:${cores.bege};
+  color:${cores.laranja};
   
 
     }
