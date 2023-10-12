@@ -6,6 +6,7 @@ import Formulario from './FormularioEntrega';
 import {CabecalhoContato, ImgContato,CardContato,CardContainer,CardModal,Modal, CarrinhoCard ,Carrinho} from './ContatoStyle';
 import logo from '../../img/logo.png'
 import lixo from '../../img/lixo.png'
+import close from '../../img/close.png'
 import { Link } from 'react-router-dom';
 
 
@@ -66,7 +67,20 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
     setexibirCarrinho(true);
     setexibirCarrinho(true);
     setExibirFormulario(false);
+    setExibirItemCarrinho(true);
   }
+
+  const abrirCarrinho2 = () => {
+    if(carrinho.length === 0){
+      alert("O carrinho está vazio, por favor adicione algum produto!")
+    }else{
+    setexibirCarrinho(true);
+    setexibirCarrinho(true);
+    setExibirFormulario(false);
+    setExibirItemCarrinho(true);}
+  }
+
+
   const fecharCarrinho = () => {
     setexibirCarrinho(false)
   }
@@ -118,7 +132,7 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
         <div className='Container'>
       <Link className='link' to={"/"} >Restaurantes</Link>
       <img src={logo} alt='logo'/> 
-      <p onClick={abrirCarrinho}>{carrinho.length} produto(s) no carrinho</p>
+      <p onClick={abrirCarrinho2}>{carrinho.length} produto(s) no carrinho</p>
       </div>
       </CabecalhoContato>
 
@@ -193,11 +207,11 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
               <div className='infosCardModal'>
               <h3>{pratoSelecionado.nome}</h3>
               <p>{pratoSelecionado.descricao}</p>
-              <p>{pratoSelecionado.porcao}</p>
+              <p>Serve: de {pratoSelecionado.porcao}</p>
               <button onClick={() => handleAdicionarAoCarrinho(pratoSelecionado)}>Adicionar ao Carrinho - R${pratoSelecionado.preco}</button>
               </div>
               <div>
-              <span onClick={fecharModal}> X </span>
+              <img onClick={fecharModal} className='fechar' src={close} alt='fechar'/>
               </div>
             </CardModal>
             </>

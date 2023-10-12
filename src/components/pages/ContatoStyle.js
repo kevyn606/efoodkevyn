@@ -183,10 +183,15 @@ top: 50%; /* Centraliza verticalmente */
   transform: translate(-50%, -50%); /* Centraliza o modal em relação ao seu tamanho */
 
 
-  span{
+  .fechar{
     cursor: pointer;
-    font-size:30px;
-    font-weight:100;
+    position:absolute;
+    top:10px;
+    left:1000px;
+    z-index:6;
+    width:16px;
+    height:16px;
+
     
   }
 
@@ -225,10 +230,11 @@ button{
 export const Carrinho = styled.div`
 background-color:${cores.vermelho};
 width:360px;
-height:100vh;
+height:100%;
 padding:8px;
 position:absolute;
 top:0;
+overflow: auto;
 
 right:0;
 z-index:12;

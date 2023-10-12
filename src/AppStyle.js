@@ -73,6 +73,7 @@ export const Card = styled.li`
   .Cardborda{
     border:  1px solid ${cores.vermelho};
     border-top: 0px;
+    height: 181px;
     
 
   }
