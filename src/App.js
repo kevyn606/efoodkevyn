@@ -35,8 +35,9 @@ function App() {
       return acc + item.preco * item.quantidade;
     }, 0);
   
-    return total.toFixed(2); // Arredonda o total para duas casas decimais
+    return total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   };
+  
 
   const removerDoCarrinho = (pratoParaRemover) => {
     const novoCarrinho = carrinho.filter((prato) => prato.id !== pratoParaRemover.id);

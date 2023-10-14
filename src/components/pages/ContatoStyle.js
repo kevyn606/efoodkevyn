@@ -221,7 +221,7 @@ button{
   padding:4px;
   font-size:14px;
   font-weight:700;
-  width:33%;
+  width:40%;
   border:none;
   cursor:pointer;
 

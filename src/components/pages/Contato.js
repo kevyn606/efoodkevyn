@@ -80,6 +80,31 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
     setExibirItemCarrinho(true);}
   }
 
+  function formatarPreco(pratoSelecionado) {
+    if (pratoSelecionado && pratoSelecionado.preco) {
+      const valor = pratoSelecionado.preco;
+      const valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      return valorFormatado;
+    } else {
+      return ''; // Retorna uma string vazia se pratoSelecionado ou pratoSelecionado.preco não estiverem definidos.
+    }
+  }
+   
+
+  function formatarPrecoItem(item) {
+    if (item && item.preco) {
+      const valor = item.preco;
+      const valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      return valorFormatado;
+    } else {
+      return ''; // Retorna uma string vazia se item ou item.preco não estiverem definidos.
+    }
+  }
+
+  
+  
+  
+
 
   const fecharCarrinho = () => {
     setexibirCarrinho(false)
@@ -123,6 +148,11 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
     return <div>Selecione um restaurante para ver os pratos.</div>;
   }
 
+  
+
+
+
+
   return (
     <>
 
@@ -158,7 +188,7 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
                         </div>
                         <div>
                           <h3>{item.nome}</h3>
-                          <p>Preço: R$ {item.preco}</p>
+                          <p>Preço: {formatarPrecoItem(item)}</p>
                         </div>
                         <div className='lixo'>
                           <img  src={lixo} alt='lixo' onClick={() => handleRemoverDoCarrinho(item)}/>
@@ -167,7 +197,7 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
                   ))}
                   <div className='valorTotal'>
                     <p>Valor total</p>
-                    <p>R$ {valorTotal}</p>
+                    <p>{valorTotal}</p>
                   </div>
                   <button className='ButtonForm' onClick={abrirFormulario}>Continuar com entrega</button>
               </Carrinho>
@@ -208,7 +238,8 @@ function Contato({ concluir,setCarrinho,carrinho, adicionarAoCarrinho, removerDo
               <h3>{pratoSelecionado.nome}</h3>
               <p>{pratoSelecionado.descricao}</p>
               <p>Serve: de {pratoSelecionado.porcao}</p>
-              <button onClick={() => handleAdicionarAoCarrinho(pratoSelecionado)}>Adicionar ao Carrinho - R${pratoSelecionado.preco}</button>
+              <button onClick={() => handleAdicionarAoCarrinho(pratoSelecionado)}>Adicionar ao Carrinho - {formatarPreco(pratoSelecionado)}</button>
+              
               </div>
               <div>
               <img onClick={fecharModal} className='fechar' src={close} alt='fechar'/>
